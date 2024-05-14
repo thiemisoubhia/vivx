@@ -49,3 +49,11 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_41aa5edc18be4165bc87f3558a1943af }}
         images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_7bbc245af8dd4261b0db17b4e870adca }}/checkpoint2:${{ github.sha }}'
+
+
+  server:
+    port: 8080
+
+  springdoc:
+    swagger-ui:
+      use-root-path: true
