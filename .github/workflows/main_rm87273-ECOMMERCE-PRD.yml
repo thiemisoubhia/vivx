@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy container app to Azure Web App - rm87273-ECOMMERCE-DEV
+name: Build and deploy container app to Azure Web App - rm87273-ECOMMERCE-PRD
 
 on:
   push:
@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_7bbc245af8dd4261b0db17b4e870adca }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_e59c251ca690460badc5dfe2ee222098 }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_1e70e37d62604397a58f1f1320aa9c36 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_8e1aca82724f474faf23433123f6db25 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_7bbc245af8dd4261b0db17b4e870adca }}/checkpoint2:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_1e70e37d62604397a58f1f1320aa9c36 }}/checkpoint2:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -45,7 +45,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'rm87273-ECOMMERCE-DEV'
+        app-name: 'rm87273-ECOMMERCE-PRD'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_41aa5edc18be4165bc87f3558a1943af }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_7bbc245af8dd4261b0db17b4e870adca }}/checkpoint2:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_290ce3b67c314592900629b5f71d9d7c }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_1e70e37d62604397a58f1f1320aa9c36 }}/checkpoint2:${{ github.sha }}'
