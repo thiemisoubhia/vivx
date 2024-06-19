@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_1346b2e8f1fa4eb6b7376e87257c5698 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_779de983dc8b41ba8a3d4464b914195e }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_261d7f9a7ca7412db584cfe8abcdf7de }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_a7b09d9524784175ae895c01e403dae0 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_1346b2e8f1fa4eb6b7376e87257c5698 }}/thiemisoubhia/vivx:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_261d7f9a7ca7412db584cfe8abcdf7de }}/vivxs:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'vivx'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_66d6a1221b704c44b7073db4dd971e70 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_1346b2e8f1fa4eb6b7376e87257c5698 }}/thiemisoubhia/vivx:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_26f6f43d9d724d89b9374cf6cc610377 }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_261d7f9a7ca7412db584cfe8abcdf7de }}/vivxs:${{ github.sha }}'
