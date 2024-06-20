@@ -1,12 +1,11 @@
 package com.github.naomisoubhia.ecommerce.service;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.github.naomisoubhia.ecommerce.model.Contratacao;
 import com.github.naomisoubhia.ecommerce.repository.ContratacaoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 @Service
 public class ContratacaoService {
@@ -18,8 +17,23 @@ public class ContratacaoService {
         return contratacaoRepository.findAll();
     }
 
-    public Contratacao save(Contratacao c) {
-        return contratacaoRepository.save(c);
+    public Contratacao findById(Long id) {
+        return contratacaoRepository.findById(id).orElse(null);
     }
 
+    public List<Contratacao> findByCodigoCliente(Long codigoCliente) {
+        return contratacaoRepository.findByCodigoCliente(codigoCliente);
+    }
+
+    public List<Contratacao> findByCodigoProduto(Long codigoProduto) {
+        return contratacaoRepository.findByCodigoProduto(codigoProduto);
+    }
+
+    public Contratacao save(Contratacao contratacao) {
+        return contratacaoRepository.save(contratacao);
+    }
+
+    public void delete(Long id) {
+        contratacaoRepository.deleteById(id);
+    }
 }
