@@ -8,8 +8,4 @@ import java.util.List;
 
 @Repository
 public interface ContratacaoRepository extends JpaRepository<Contratacao, Long> {
-
-    List<Contratacao> findByCodigoCliente(Long codigoCliente);
-
-    List<Contratacao> findByCodigoProduto(Long codigoProduto);
 }
