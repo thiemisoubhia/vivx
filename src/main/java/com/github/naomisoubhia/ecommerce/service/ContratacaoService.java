@@ -4,8 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.fiap.checkpoint2.model.Contratacao;
-import br.com.fiap.checkpoint2.repository.ContratacaoRepository;
+import com.github.naomisoubhia.ecommerce.model.Contratacao;
+import com.github.naomisoubhia.ecommerce.repository.ContratacaoRepository;
 
 
 @Service
