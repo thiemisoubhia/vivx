@@ -1,47 +1,48 @@
 package com.github.naomisoubhia.ecommerce.model;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "produtos")
-public class Produto {
+public class Produtos {
     @Id
-    private String id;
-    
-    @Column(name = "product_name")
-    private String productName;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long codigo_produto;
 
-    private String productType;
+    private String nome;
+    private String tipoProduto;
     private String status;
-    private String startDate;
-    private String subscriptionType;
+    private String dataIn;
+    private String tipoAssinatura;
+    private String descricao;
 
-
-    // Getters and setters
-
-    public String getId() {
-        return id;
+    // Getters and Setters
+    public Long getCodigo_produto() {
+        return codigo_produto;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCodigo_produto(Long codigo_produto) {
+        this.codigo_produto = codigo_produto;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getNome() {
+        return nome;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getProductType() {
-        return productType;
+    public String getTipoProduto() {
+        return tipoProduto;
     }
 
-    public void setProductType(String productType) {
-        this.productType = productType;
+    public void setTipoProduto(String tipoProduto) {
+        this.tipoProduto = tipoProduto;
     }
 
     public String getStatus() {
@@ -52,19 +53,27 @@ public class Produto {
         this.status = status;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getDataIn() {
+        return dataIn;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setDataIn(String dataIn) {
+        this.dataIn = dataIn;
     }
 
-    public String getSubscriptionType() {
-        return subscriptionType;
+    public String getTipoAssinatura() {
+        return tipoAssinatura;
     }
 
-    public void setSubscriptionType(String subscriptionType) {
-        this.subscriptionType = subscriptionType;
+    public void setTipoAssinatura(String tipoAssinatura) {
+        this.tipoAssinatura = tipoAssinatura;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
