@@ -28,7 +28,7 @@ public class ProdutoController {
 
     @GetMapping("/{codigo_produto}")
     public ResponseEntity<ProdutoResponse> getById(@PathVariable Long codigo_produto) {
-        Produtos produto = produtoService.findById(codigo_produto);
+        Produto produto = produtoService.findById(codigo_produto);
         if (produto == null) {
             return ResponseEntity.notFound().build();
         }
@@ -36,8 +36,8 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public Produtos create(@RequestBody ProdutoRequestCreate dto) {
-        Produtos produto = new Produtos();
+    public Produto create(@RequestBody ProdutoRequestCreate dto) {
+        Produto produto = new Produto();
         produto.setNome(dto.getNome());
         produto.setTipoProduto(dto.getTipoProduto());
         produto.setStatus(dto.getStatus());
@@ -48,8 +48,8 @@ public class ProdutoController {
     }
 
     @PutMapping("/{codigo_produto}")
-    public ResponseEntity<Produtos> update(@PathVariable Long codigo_produto, @RequestBody ProdutoRequestUpdate dto) {
-        Produtos produto = produtoService.findById(codigo_produto);
+    public ResponseEntity<Produto> update(@PathVariable Long codigo_produto, @RequestBody ProdutoRequestUpdate dto) {
+        Produto produto = produtoService.findById(codigo_produto);
         if (produto == null) {
             return ResponseEntity.notFound().build();
         }
@@ -59,7 +59,7 @@ public class ProdutoController {
         produto.setDataIn(dto.getDataIn());
         produto.setTipoAssinatura(dto.getTipoAssinatura());
         produto.setDescricao(dto.getDescricao());
-        Produtos updatedProduto = produtoService.save(produto);
+        Produto updatedProduto = produtoService.save(produto);
         return ResponseEntity.ok(updatedProduto);
     }
 
