@@ -41,7 +41,7 @@ public class ClienteController {
         ClienteDTO clienteDTO = convertToClienteDTO(cliente);
         return ResponseEntity.ok(clienteDTO);
     }
-
+    
     private ClienteDTO convertToClienteDTO(Cliente cliente) {
         ClienteDTO dto = new ClienteDTO();
         dto.setClienteId(cliente.getClienteId());
