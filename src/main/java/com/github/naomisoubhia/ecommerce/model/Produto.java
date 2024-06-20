@@ -28,14 +28,6 @@ public class Produto {
         this.id = id;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
     public String getProductName() {
         return productName;
     }
