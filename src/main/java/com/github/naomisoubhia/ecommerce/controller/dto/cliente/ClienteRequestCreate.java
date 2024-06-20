@@ -2,8 +2,7 @@ package com.github.naomisoubhia.ecommerce.controller.dto.cliente;
 
 public class ClienteRequestCreate {
     private String nome;
-    private Long inscricao_federal;
-    private Long cep;
+    private String email;
     
     // Getters e Setters
     public String getNome() {
@@ -14,19 +13,12 @@ public class ClienteRequestCreate {
         this.nome = nome;
     }
 
-    public Long getInscricao_federal() {
-        return inscricao_federal;
+    public String getEmail() {
+        return email;
     }
 
-    public void setInscricao_federal(Long inscricao_federal) {
-        this.inscricao_federal = inscricao_federal;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Long getCep() {
-        return cep;
-    }
-
-    public void setCep(Long cep) {
-        this.cep = cep;
-    }
 }
