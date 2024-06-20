@@ -6,6 +6,6 @@ import br.com.fiap.checkpoint2.model.Contratacao;
 
 
 @Repository
-public interface PedidoRepository extends JpaRepository<Contratacao, Long>{
+public interface ContratacaoRepository extends JpaRepository<Contratacao, Long>{
 
 }
