@@ -54,4 +54,18 @@ public class ContratacaoController {
     public void delete(@PathVariable Long numero_contratacao) {
         contratacaoService.delete(numero_contratacao);
     }
+
+    @GetMapping("/cliente/{codigo_cliente}")
+    public List<SearchedContratacao> findByCodigoCliente(@PathVariable Long codigo_cliente) {
+        return contratacaoService.findByCodigoCliente(codigo_cliente).stream()
+                .map(SearchedContratacao::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/produto/{codigo_produto}")
+    public List<SearchedContratacao> findByCodigoProduto(@PathVariable Long codigo_produto) {
+        return contratacaoService.findByCodigoProduto(codigo_produto).stream()
+                .map(SearchedContratacao::toDto)
+                .collect(Collectors.toList());
+    }
 }
