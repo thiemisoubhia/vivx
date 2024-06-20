@@ -1,12 +1,16 @@
 package com.github.naomisoubhia.ecommerce.controller;
 
-import com.github.naomisoubhia.ecommerce.model.Produtos;
+import com.github.naomisoubhia.ecommerce.controller.dto.produto.ProdutoRequestCreate;
+import com.github.naomisoubhia.ecommerce.controller.dto.produto.ProdutoRequestUpdate;
+import com.github.naomisoubhia.ecommerce.controller.dto.produto.ProdutoResponse;
+import com.github.naomisoubhia.ecommerce.model.Produto;
 import com.github.naomisoubhia.ecommerce.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/produtos")
@@ -16,36 +20,45 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @GetMapping
-    public List<Produtos> listAll() {
-        return produtoService.list();
+    public List<ProdutoResponse> listAll() {
+        return produtoService.list().stream()
+                .map(ProdutoResponse::toDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{codigo_produto}")
-    public ResponseEntity<Produtos> getById(@PathVariable Long codigo_produto) {
+    public ResponseEntity<ProdutoResponse> getById(@PathVariable Long codigo_produto) {
         Produtos produto = produtoService.findById(codigo_produto);
         if (produto == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(produto);
+        return ResponseEntity.ok(ProdutoResponse.toDto(produto));
     }
 
     @PostMapping
-    public Produtos create(@RequestBody Produtos produto) {
+    public Produtos create(@RequestBody ProdutoRequestCreate dto) {
+        Produtos produto = new Produtos();
+        produto.setNome(dto.getNome());
+        produto.setTipoProduto(dto.getTipoProduto());
+        produto.setStatus(dto.getStatus());
+        produto.setDataIn(dto.getDataIn());
+        produto.setTipoAssinatura(dto.getTipoAssinatura());
+        produto.setDescricao(dto.getDescricao());
         return produtoService.save(produto);
     }
 
     @PutMapping("/{codigo_produto}")
-    public ResponseEntity<Produtos> update(@PathVariable Long codigo_produto, @RequestBody Produtos produtoDetails) {
+    public ResponseEntity<Produtos> update(@PathVariable Long codigo_produto, @RequestBody ProdutoRequestUpdate dto) {
         Produtos produto = produtoService.findById(codigo_produto);
         if (produto == null) {
             return ResponseEntity.notFound().build();
         }
-        produto.setNome(produtoDetails.getNome());
-        produto.setTipoProduto(produtoDetails.getTipoProduto());
-        produto.setStatus(produtoDetails.getStatus());
-        produto.setDataIn(produtoDetails.getDataIn());
-        produto.setTipoAssinatura(produtoDetails.getTipoAssinatura());
-        produto.setDescricao(produtoDetails.getDescricao());
+        produto.setNome(dto.getNome());
+        produto.setTipoProduto(dto.getTipoProduto());
+        produto.setStatus(dto.getStatus());
+        produto.setDataIn(dto.getDataIn());
+        produto.setTipoAssinatura(dto.getTipoAssinatura());
+        produto.setDescricao(dto.getDescricao());
         Produtos updatedProduto = produtoService.save(produto);
         return ResponseEntity.ok(updatedProduto);
     }
