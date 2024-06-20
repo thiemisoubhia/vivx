@@ -1,8 +1,8 @@
 package com.github.naomisoubhia.ecommerce.controller;
 
-import com.github.naomisoubhia.ecommerce.controller.dto.produto.ProdutoRequestCreate;
-import com.github.naomisoubhia.ecommerce.controller.dto.produto.ProdutoRequestUpdate;
-import com.github.naomisoubhia.ecommerce.controller.dto.produto.ProdutoResponse;
+import com.github.naomisoubhia.ecommerce.controller.dto.produtos.ProdutoRequestCreate;
+import com.github.naomisoubhia.ecommerce.controller.dto.produtos.ProdutoRequestUpdate;
+import com.github.naomisoubhia.ecommerce.controller.dto.produtos.ProdutoResponse;
 import com.github.naomisoubhia.ecommerce.model.Produto;
 import com.github.naomisoubhia.ecommerce.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
