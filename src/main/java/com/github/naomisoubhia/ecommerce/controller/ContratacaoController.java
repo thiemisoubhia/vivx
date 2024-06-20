@@ -41,6 +41,7 @@ public class ContratacaoController {
 	public Contratacao create(@RequestBody ContratacaoRequestCreate dto) {
 		Contratacao contratacao = new Contratacao();
 		contratacao.setCodigo_cliente(dto.getCodigo_cliente());
+		contratacao.setCodigo_produto(dto.getCodigo_produto());
 		contratacao.setData_contratacao(dto.getData_contratacao());
 		Contratacao result = contratacaoService.save(contratacao);
 		return result;
@@ -59,6 +60,7 @@ public class ContratacaoController {
 		
 		Contratacao contratacao = new Contratacao();
 		contratacao.setCodigo_cliente(dto.getCodigo_cliente());
+		contratacao.setCodigo_produto(dto.getCodigo_produto());
 		contratacao.setData_contratacao(dto.getData_contratacao());
 		contratacao.setNumero_contratacao(dto.getNumero_contratacao());
 		Contratacao result = contratacaoService.save(contratacao);
