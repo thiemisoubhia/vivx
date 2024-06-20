@@ -4,6 +4,7 @@ import com.github.naomisoubhia.ecommerce.controller.dto.cliente.ClienteRequestCr
 import com.github.naomisoubhia.ecommerce.controller.dto.cliente.ClienteRequestUpdate;
 import com.github.naomisoubhia.ecommerce.controller.dto.cliente.SearchedCliente;
 import com.github.naomisoubhia.ecommerce.model.Cliente;
+import org.springframework.http.ResponseEntity;
 import com.github.naomisoubhia.ecommerce.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
