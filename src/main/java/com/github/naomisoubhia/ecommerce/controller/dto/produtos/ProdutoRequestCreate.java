@@ -1,4 +1,4 @@
-package com.github.naomisoubhia.ecommerce.controller.dto.produto;
+package com.github.naomisoubhia.ecommerce.controller.dto.produtos;
 
 public class ProdutoRequestCreate {
     private String nome;
