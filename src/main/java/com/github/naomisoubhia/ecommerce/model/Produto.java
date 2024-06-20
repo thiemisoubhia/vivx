@@ -25,10 +25,6 @@ public class Produto{
         return codigo_produto;
     }
 
-    public void setCodigo_produto(Long codigo_produto) {
-        this.codigo_produto = codigo_produto;
-    }
-
     public String getNome() {
         return nome;
     }
