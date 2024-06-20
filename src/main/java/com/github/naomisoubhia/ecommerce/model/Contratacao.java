@@ -24,6 +24,11 @@ public class Contratacao {
 		return numero_contratacao;
 	}
 
+	public void setNumero_contrataca(Long numero_contrataca) {
+		this.numero_contrataca = numero_contrataca;
+	}
+	
+
 	public Long getCodigo_cliente() {
 		return codigo_cliente;
 	}
