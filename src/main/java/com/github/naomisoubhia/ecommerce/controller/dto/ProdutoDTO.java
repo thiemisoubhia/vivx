@@ -8,7 +8,8 @@ public class ProdutoDTO {
     private String startDate;
     private String subscriptionType;
 
-    public ProductDTO() {}
+    // Construtor padrão
+    public ProdutoDTO() {}
 
     // Getters e setters
     public String getId() {
