@@ -1,6 +1,6 @@
 package com.github.naomisoubhia.ecommerce.service;
 
-import com.github.naomisoubhia.ecommerce.model.Produtos;
+import com.github.naomisoubhia.ecommerce.model.Produto;
 import com.github.naomisoubhia.ecommerce.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,16 +14,16 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public List<Produtos> list() {
+    public List<Produto> list() {
         return produtoRepository.findAll();
     }
 
-    public Produtos save(Produtos produto) {
+    public Produto save(Produto produto) {
         return produtoRepository.save(produto);
     }
 
-    public Produtos findById(Long codigo_produto) {
-        Optional<Produtos> produtoOptional = produtoRepository.findById(codigo_produto);
+    public Produto findById(Long codigo_produto) {
+        Optional<Produto> produtoOptional = produtoRepository.findById(codigo_produto);
         return produtoOptional.orElse(null);
     }
 
