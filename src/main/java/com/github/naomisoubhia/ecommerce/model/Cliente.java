@@ -15,8 +15,7 @@ public class Cliente {
 	private Long codigo_cliente;
 	
 	private String nome;
-	private Long inscricao_federal;
-	private Long cep;
+	private String email;
 	
 	public Long getCodigo_cliente() {
 		return codigo_cliente;
@@ -30,16 +29,10 @@ public class Cliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Long getInscricao_federal() {
-		return inscricao_federal;
+	public String getEmail() {
+		return email;
 	}
-	public void setInscricao_federal(Long inscricao_federal) {
-		this.inscricao_federal = inscricao_federal;
-	}
-	public Long getCep() {
-		return cep;
-	}
-	public void setCep(Long cep) {
-		this.cep = cep;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
