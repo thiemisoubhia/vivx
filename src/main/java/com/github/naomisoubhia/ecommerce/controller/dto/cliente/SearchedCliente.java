@@ -1,6 +1,6 @@
 package com.github.naomisoubhia.ecommerce.controller.dto.cliente;
 
-import br.com.fiap.checkpoint2.model.Cliente;
+import com.github.naomisoubhia.ecommerce.model.Cliente;
 
 public class SearchedCliente {
 	private Long codigo_cliente;
