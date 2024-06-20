@@ -1,6 +1,6 @@
-package br.com.fiap.checkpoint2.controller.dto.contratacao;
+package com.github.naomisoubhia.ecommerce.controller.dto.contratacao;
 
-import br.com.fiap.checkpoint2.model.Contratacao;
+import com.github.naomisoubhia.ecommerce.model.Contratacao;
 
 
 public class SearchedContratacao {
