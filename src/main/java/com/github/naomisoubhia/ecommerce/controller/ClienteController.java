@@ -39,7 +39,7 @@ public class ClienteController {
     
     private ClienteDTO convertToClienteDTO(Cliente cliente) {
         ClienteDTO dto = new ClienteDTO();
-        dto.setClienteId(cliente.getId());
+        dto.setClienteId(cliente.getClienteId());
         dto.setName(cliente.getName());
         dto.setEmail(cliente.getEmail());
         return dto;
