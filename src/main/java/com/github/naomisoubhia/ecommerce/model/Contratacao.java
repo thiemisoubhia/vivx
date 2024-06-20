@@ -24,8 +24,8 @@ public class Contratacao {
 		return numero_contratacao;
 	}
 
-	public void setNumero_contrataca(Long numero_contrataca) {
-		this.numero_contrataca = numero_contrataca;
+	public void setNumero_contratacao(Long numero_contratacao) {
+		this.numero_contratacao = numero_contratacao;
 	}
 	
 
