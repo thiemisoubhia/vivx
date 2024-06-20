@@ -1,42 +1,42 @@
 package com.github.naomisoubhia.ecommerce.controller;
 
-import com.github.naomisoubhia.ecommerce.model.Product;
-import com.github.naomisoubhia.ecommerce.service.ProductService;
+import com.github.naomisoubhia.ecommerce.model.Produto;
+import com.github.naomisoubhia.ecommerce.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
-public class ProductController {
+@RequestMapping("/api/produtos")
+public class ProdutoController {
 
     @Autowired
-    private ProductService productService;
+    private ProdutoService produtoService;
 
     @GetMapping
-    public List<Product> getAllProducts() {
-        return productService.findAll();
+    public List<Produto> getAllProdutos() {
+        return produtoService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable String id) {
+    public ResponseEntity<Produto> getProdutoById(@PathVariable String id) {
         try {
-            Product product = productService.findById(id);
-            return ResponseEntity.ok(product);
+            Produto produto = produtoService.findById(id);
+            return ResponseEntity.ok(produto);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        return productService.save(product);
+    public Produto createProduto(@RequestBody Produto produto) {
+        return produtoService.save(produto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteProduct(@PathVariable String id) {
-        productService.delete(id);
+    public ResponseEntity<?> deleteProduto(@PathVariable String id) {
+        produtoService.delete(id);
         return ResponseEntity.ok().build();
     }
 }
