@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.checkpoint2.controller.dto.contratacao.ContratacaoRequestCreate;
-import br.com.fiap.checkpoint2.controller.dto.contratacao.ContratacaoRequestUpdate;
-import br.com.fiap.checkpoint2.controller.dto.contratacao.SearchedContratacao;
-import br.com.fiap.checkpoint2.model.Contratacao;
-import br.com.fiap.checkpoint2.repository.ContratacaoRepository;
-import br.com.fiap.checkpoint2.service.ContratacaoService;
+import com.github.naomisoubhia.ecommerce.controller.dto.contratacao.ContratacaoRequestCreate;
+import com.github.naomisoubhia.ecommerce.controller.dto.contratacao.ContratacaoRequestUpdate;
+import com.github.naomisoubhia.ecommerce.controller.dto.contratacao.SearchedContratacao;
+import com.github.naomisoubhia.ecommerce.model.Contratacao;
+import com.github.naomisoubhia.ecommerce.repository.ContratacaoRepository;
+import com.github.naomisoubhia.ecommerce.service.ContratacaoService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
