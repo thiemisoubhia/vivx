@@ -1,6 +1,7 @@
-package com.github.naomisoubhia.ecommerce.controller.dto.produto;
+package com.github.naomisoubhia.ecommerce.controller.dto.produtos;
 
 public class ProdutoRequestUpdate {
+    private Long codigoProduto;
     private String nome;
     private String tipoProduto;
     private String status;
@@ -9,6 +10,14 @@ public class ProdutoRequestUpdate {
     private String descricao;
 
     // Getters and Setters
+    public Long getCodigoProduto() {
+        return codigoProduto;
+    }
+
+    public void setCodigoProduto(Long codigoProduto) {
+        this.codigoProduto = codigoProduto;
+    }
+
     public String getNome() {
         return nome;
     }
