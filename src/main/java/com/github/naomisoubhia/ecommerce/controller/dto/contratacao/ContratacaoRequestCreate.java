@@ -3,6 +3,7 @@ import java.time.LocalDate;
 
 public class ContratacaoRequestCreate {
     private Long codigo_cliente;
+    private Long codigo_produto;
     private LocalDate data_contratacao;
     
     public Long getCodigo_cliente() {
@@ -11,6 +12,14 @@ public class ContratacaoRequestCreate {
     public void setCodigo_cliente(Long codigo_cliente) {
         this.codigo_cliente = codigo_cliente;
     }
+
+    public Long getCodigo_produto() {
+        return codigo_produto;
+    }
+    public void setCodigo_produto(Long codigo_produto) {
+        this.codigo_produto = codigo_produto;
+    }
+    
     public LocalDate getData_contratacao() {
         return data_contratacao;
     }
