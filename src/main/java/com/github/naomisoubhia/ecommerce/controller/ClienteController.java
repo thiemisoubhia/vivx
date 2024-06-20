@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.fiap.checkpoint2.controller.dto.cliente.ClienteRequestCreate;
-import br.com.fiap.checkpoint2.controller.dto.cliente.ClienteRequestUpdate;
-import br.com.fiap.checkpoint2.controller.dto.cliente.SearchedCliente;
-import br.com.fiap.checkpoint2.model.Cliente;
-import br.com.fiap.checkpoint2.repository.ClienteRepository;
-import br.com.fiap.checkpoint2.service.ClienteService;
+import com.github.naomisoubhia.ecommerce.controller.dto.cliente.ClienteRequestCreate;
+import com.github.naomisoubhia.ecommerce.controller.dto.cliente.ClienteRequestUpdate;
+import com.github.naomisoubhia.ecommerce.controller.dto.cliente.SearchedCliente;
+import com.github.naomisoubhia.ecommerce.model.Cliente;
+import com.github.naomisoubhia.ecommerce.repository.ClienteRepository;
+import com.github.naomisoubhia.ecommerce.service.ClienteService;
 
 
 
