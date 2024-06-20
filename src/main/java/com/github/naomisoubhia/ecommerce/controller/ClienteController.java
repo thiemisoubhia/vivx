@@ -40,8 +40,7 @@ public class ClienteController {
     public Cliente create(@RequestBody ClienteRequestCreate dto) {
         Cliente cliente = new Cliente();
         cliente.setNome(dto.getNome());
-        cliente.setCep(dto.getCep());
-        cliente.setInscricao_federal(dto.getInscricao_federal());
+        cliente.setEmail(dto.getEmail());
         return clienteService.save(cliente);
     }
 
@@ -52,8 +51,7 @@ public class ClienteController {
             throw new RuntimeException("Cliente não encontrado com o código: " + codigo_cliente);
         }
         cliente.setNome(dto.getNome());
-        cliente.setCep(dto.getCep());
-        cliente.setInscricao_federal(dto.getInscricao_federal());
+        cliente.setEmail(dto.getEmail());
         return clienteService.save(cliente);
     }
 
