@@ -39,12 +39,9 @@ public class ClienteController {
     
     private ClienteDTO convertToClienteDTO(Cliente cliente) {
         ClienteDTO dto = new ClienteDTO();
-        dto.setClienteId(cliente.getClienteId());
+        dto.setClienteId(cliente.getId());
         dto.setName(cliente.getName());
         dto.setEmail(cliente.getEmail());
-        dto.setProducts(cliente.getProducts().stream()
-                .map(this::convertToProductDTO)
-                .collect(Collectors.toList()));
         return dto;
     }
 }
