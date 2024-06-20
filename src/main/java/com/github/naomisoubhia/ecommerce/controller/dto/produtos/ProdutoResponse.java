@@ -25,7 +25,7 @@ public class ProdutoResponse {
 
     public static ProdutoResponse toDto(Produto produto) {
         ProdutoResponse dto = new ProdutoResponse();
-        dto.setCodigoProduto(produto.getCodigoProduto());
+        dto.setCodigoProduto(produto.getCodigo_produto());
         dto.setNome(produto.getNome());
         return dto;
     }
