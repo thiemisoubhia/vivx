@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +32,12 @@ public class ContratacaoController {
         Contratacao contratacao = new Contratacao();
         contratacao.setCodigo_cliente(dto.getCodigo_cliente());
         contratacao.setCodigo_produto(dto.getCodigo_produto());
-        contratacao.setData_contratacao(dto.getData_contratacao());
+        
+        // Converter java.util.Date para java.time.LocalDate
+        LocalDate dataContratacao = dto.getData_contratacao().toInstant()
+                .atZone(ZoneId.systemDefault()).toLocalDate();
+        contratacao.setData_contratacao(dataContratacao);
+
         return contratacaoService.save(contratacao);
     }
 
@@ -43,7 +50,11 @@ public class ContratacaoController {
 
         contratacao.setCodigo_cliente(dto.getCodigo_cliente());
         contratacao.setCodigo_produto(dto.getCodigo_produto());
-        contratacao.setData_contratacao(dto.getData_contratacao());
+
+        // Converter java.util.Date para java.time.LocalDate
+        LocalDate dataContratacao = dto.getData_contratacao().toInstant()
+                .atZone(ZoneId.systemDefault()).toLocalDate();
+        contratacao.setData_contratacao(dataContratacao);
 
         Contratacao updatedContratacao = contratacaoService.save(contratacao);
         return ResponseEntity.ok(updatedContratacao);
