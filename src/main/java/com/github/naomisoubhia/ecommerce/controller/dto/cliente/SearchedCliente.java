@@ -1,4 +1,4 @@
-package br.com.fiap.checkpoint2.controller.dto.cliente;
+package com.github.naomisoubhia.ecommerce.controller.dto.cliente;
 
 import br.com.fiap.checkpoint2.model.Cliente;
 
