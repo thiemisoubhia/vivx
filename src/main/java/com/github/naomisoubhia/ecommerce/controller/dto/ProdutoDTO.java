@@ -1,6 +1,6 @@
 package com.github.naomisoubhia.ecommerce.controller.dto;
 
-public class ProductDTO {
+public class ProdutoDTO {
     private String id;
     private String productName;
     private String productType;
