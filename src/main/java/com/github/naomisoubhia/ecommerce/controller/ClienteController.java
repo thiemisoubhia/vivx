@@ -40,4 +40,14 @@ public class ClienteController {
         if (cliente == null) {
             throw new RuntimeException("Cliente não encontrado com o código: " + codigo_cliente);
         }
-        
+        cliente.setNome(dto.getNome());
+        cliente.setCep(dto.getCep());
+        cliente.setInscricao_federal(dto.getInscricao_federal());
+        return clienteService.save(cliente);
+    }
+
+    @DeleteMapping("/{codigo_cliente}")
+    public void delete(@PathVariable Long codigo_cliente) {
+        clienteService.delete(codigo_cliente);
+    }
+}
