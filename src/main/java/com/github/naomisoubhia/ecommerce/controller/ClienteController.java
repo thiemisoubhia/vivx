@@ -32,18 +32,8 @@ public class ClienteController {
         }
     }
 
-    @GetMapping("/{clienteId}")
-    public ResponseEntity<ClienteDTO> getClienteWithProducts(@PathVariable String clienteId) {
-        Cliente cliente = clienteService.findById(clienteId);
-        if (cliente == null) {
-            return ResponseEntity.notFound().build();
-        }
-        ClienteDTO clienteDTO = convertToClienteDTO(cliente);
-        return ResponseEntity.ok(clienteDTO);
-    }
-
     @PostMapping
-    public Produto createCliente(@RequestBody Cliente cliente) {
+    public Cliente createCliente(@RequestBody Cliente cliente) {
         return clienteService.save(cliente);
     }
     
