@@ -25,18 +25,14 @@ public class ContratacaoController {
                 .collect(Collectors.toList());
     }
 
-@PostMapping
-public Contratacao create(@RequestBody ContratacaoRequestCreate dto) {
-    Contratacao contratacao = new Contratacao();
-    // Certifique-se de que os métodos do DTO correspondem aos atributos corretos
-    contratacao.setCodigo_cliente(dto.getCodigo_cliente());
-    contratacao.setCodigo_produto(dto.getCodigo_produto());
-    contratacao.setData_contratacao(dto.getData_contratacao());
-
-    Contratacao result = contratacaoService.save(contratacao);
-    return result;
-}
-
+    @PostMapping
+    public Contratacao create(@RequestBody ContratacaoRequestCreate dto) {
+        Contratacao contratacao = new Contratacao();
+        contratacao.setCodigo_cliente(dto.getCodigo_cliente());
+        contratacao.setCodigo_produto(dto.getCodigo_produto());
+        contratacao.setData_contratacao(dto.getData_contratacao());
+        return contratacaoService.save(contratacao);
+    }
 
     @PutMapping("/{numero_contratacao}")
     public ResponseEntity<Contratacao> update(@PathVariable Long numero_contratacao, @RequestBody ContratacaoRequestUpdate dto) {
