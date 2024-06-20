@@ -16,19 +16,28 @@ public class Contratacao {
 	private Long numero_contratacao;
 	
 	private Long codigo_cliente;
+	private Long codigo_produto;
 	private LocalDate data_contratacao;
+
+	//get e set
 	public Long getNumero_contratacao() {
 		return numero_contratacao;
 	}
-	public void setNumero_contratacao(Long numero_contratacao) {
-		this.numero_contratacao = numero_contratacao;
-	}
+
 	public Long getCodigo_cliente() {
 		return codigo_cliente;
 	}
 	public void setCodigo_cliente(Long codigo_cliente) {
 		this.codigo_cliente = codigo_cliente;
 	}
+
+	public Long getCodigo_produto() {
+		return codigo_cliente;
+	}
+	public void setCodigo_produto(Long codigo_produto) {
+		this.codigo_cliente = codigo_cliente;
+	}
+	
 	public LocalDate getData_contratacao() {
 		return data_contratacao;
 	}
