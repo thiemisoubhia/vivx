@@ -17,7 +17,7 @@ public class ClienteCreate {
         return email;
     }
 
-    public void setEmail(Long email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 }
