@@ -2,21 +2,20 @@ package com.github.naomisoubhia.ecommerce.controller.dto;
 
 import java.util.List;
 
-public class ClientDTO {
-    private String clientId;
+public class ClienteDTO {
+    private String clienteId;
     private String name;
     private String email;
-    private List<ProductDTO> products;
 
-    public ClientDTO() {}
+    public ClienteDTO() {}
 
     // Getters e setters
-    public String getClientId() {
-        return clientId;
+    public String getClienteId() {
+        return clienteId;
     }
 
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
+    public void setClienteId(String clienteId) {
+        this.clienteId = clienteId;
     }
 
     public String getName() {
@@ -33,13 +32,5 @@ public class ClientDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<ProductDTO> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<ProductDTO> products) {
-        this.products = products;
     }
 }
