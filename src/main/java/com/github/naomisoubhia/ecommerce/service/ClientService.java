@@ -1,6 +1,6 @@
 package com.github.naomisoubhia.ecommerce.service;
 
-import com.github.naomisoubhia.ecommerce.model.Client;
+import com.github.naomisoubhia.ecommerce.model.Cliente;
 import com.github.naomisoubhia.ecommerce.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,24 +9,24 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ClientService {
+public class ClienteService {
 
     @Autowired
-    private ClienteRepository clientRepository;
+    private ClienteRepository clienteRepository;
 
-    public List<Client> findAll() {
-        return clientRepository.findAll();
+    public List<Cliente> findAll() {
+        return clienteRepository.findAll();
     }
 
-    public Client findById(String id) {
-        return clientRepository.findById(Long.valueOf(id)).orElseThrow(() -> new RuntimeException("Client not found"));
+    public Cliente findById(String id) {
+        return clienteRepository.findById(Long.valueOf(id)).orElseThrow(() -> new RuntimeException("Cliente not found"));
     }
 
-    public Client save(Client client) {
-        return clientRepository.save(client);
+    public Cliente save(Cliente cliente) {
+        return clienteRepository.save(cliente);
     }
 
     public void delete(String id) {
-        clientRepository.deleteById(Long.valueOf(id));
+        clienteRepository.deleteById(Long.valueOf(id));
     }
 }
