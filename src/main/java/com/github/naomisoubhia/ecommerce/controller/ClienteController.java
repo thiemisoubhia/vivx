@@ -41,6 +41,11 @@ public class ClienteController {
         ClienteDTO clienteDTO = convertToClienteDTO(cliente);
         return ResponseEntity.ok(clienteDTO);
     }
+
+    @PostMapping
+    public Produto createCliente(@RequestBody Cliente cliente) {
+        return clienteService.save(cliente);
+    }
     
     private ClienteDTO convertToClienteDTO(Cliente cliente) {
         ClienteDTO dto = new ClienteDTO();
