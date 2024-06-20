@@ -7,8 +7,8 @@ import java.util.List;
 @Table(name = "cliente")
 public class Cliente {
 	@Id
-	@Column(name = "client_id")
-	private String clientId;
+	@Column(name = "cliente_id")
+	private String clienteId;
 
 	private String name;
 	private String email;
@@ -16,12 +16,12 @@ public class Cliente {
 	
 	// Getters and setters
 
-	public String getClientId() {
-		return clientId;
+	public String getClienteId() {
+		return clienteId;
 	}
 
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
+	public void setClienteId(String clienteId) {
+		this.clienteId = clienteId;
 	}
 
 	public String getName() {
