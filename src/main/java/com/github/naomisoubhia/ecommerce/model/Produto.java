@@ -4,15 +4,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "produtos")
+public class Produto {
     @Id
     private String id;
-
-    @ManyToOne
-    @JoinColumn(name = "client_id", nullable = false)
-    private Client client;
-
+    
     @Column(name = "product_name")
     private String productName;
 
@@ -21,11 +17,6 @@ public class Product {
     private String startDate;
     private String subscriptionType;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Description> descriptions;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductIdentifier> identifiers;
 
     // Getters and setters
 
@@ -83,21 +74,5 @@ public class Product {
 
     public void setSubscriptionType(String subscriptionType) {
         this.subscriptionType = subscriptionType;
-    }
-
-    public List<Description> getDescriptions() {
-        return descriptions;
-    }
-
-    public void setDescriptions(List<Description> descriptions) {
-        this.descriptions = descriptions;
-    }
-
-    public List<ProductIdentifier> getIdentifiers() {
-        return identifiers;
-    }
-
-    public void setIdentifiers(List<ProductIdentifier> identifiers) {
-        this.identifiers = identifiers;
     }
 }
