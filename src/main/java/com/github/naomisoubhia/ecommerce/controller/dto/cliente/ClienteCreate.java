@@ -13,7 +13,7 @@ public class ClienteCreate {
         this.nome = nome;
     }
 
-    public Long getEmail() {
+    public String getEmail() {
         return email;
     }
 
