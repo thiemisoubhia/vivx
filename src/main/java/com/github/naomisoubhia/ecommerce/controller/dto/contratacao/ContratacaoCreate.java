@@ -1,4 +1,4 @@
-package com.github.naomisoubhia.ecommerce.dto.contratacao;
+package com.github.naomisoubhia.ecommerce.controller.dto.contratacao;
 
 import java.time.LocalDate;
 
