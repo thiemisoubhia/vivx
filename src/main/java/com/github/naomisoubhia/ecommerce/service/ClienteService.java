@@ -21,8 +21,7 @@ public class ClienteService {
     }
 
     public Cliente findById(Long id) {
-        Optional<Cliente> clienteOptional = clienteRepository.findById(id);
-        return clienteOptional.orElse(null);
+        return clienteRepository.findById(id).orElse(null);
     }
 
     public Cliente save(Cliente cliente) {
