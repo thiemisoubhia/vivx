@@ -1,75 +1,57 @@
 package com.github.naomisoubhia.ecommerce.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.github.naomisoubhia.ecommerce.controller.dto.contratacao.ContratacaoRequestCreate;
 import com.github.naomisoubhia.ecommerce.controller.dto.contratacao.ContratacaoRequestUpdate;
 import com.github.naomisoubhia.ecommerce.controller.dto.contratacao.SearchedContratacao;
 import com.github.naomisoubhia.ecommerce.model.Contratacao;
-import com.github.naomisoubhia.ecommerce.repository.ContratacaoRepository;
 import com.github.naomisoubhia.ecommerce.service.ContratacaoService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/contratacao")
 public class ContratacaoController {
 
-	@Autowired
-	private ContratacaoService contratacaoService;
+    @Autowired
+    private ContratacaoService contratacaoService;
 
-	@Autowired
-	private ContratacaoRepository contratacaoRepository;
+    @GetMapping
+    public List<SearchedContratacao> listAll() {
+        return contratacaoService.list().stream().map(SearchedContratacao::toDto)
+                .collect(Collectors.toList());
+    }
 
-	@GetMapping
-	public List<SearchedContratacao> listall() {
-		List<SearchedContratacao> searchedPessoa = contratacaoService.list().stream().map(SearchedContratacao::toDto)
-				.collect(Collectors.toList());
-		return searchedPessoa;
-	}
+    @PostMapping
+    public Contratacao create(@RequestBody ContratacaoRequestCreate dto) {
+        Contratacao contratacao = new Contratacao();
+        contratacao.setCodigo_cliente(dto.getCodigo_cliente());
+        contratacao.setCodigo_produto(dto.getCodigo_produto());
+        contratacao.setData_contratacao(dto.getData_contratacao());
+        Contratacao result = contratacaoService.save(contratacao);
+        return result;
+    }
 
-	@PostMapping
-	public Contratacao create(@RequestBody ContratacaoRequestCreate dto) {
-		Contratacao contratacao = new Contratacao();
-		contratacao.setCodigo_cliente(dto.getCodigo_cliente());
-		contratacao.setCodigo_produto(dto.getCodigo_produto());
-		contratacao.setData_contratacao(dto.getData_contratacao());
-		Contratacao result = contratacaoService.save(contratacao);
-		return result;
-	}
+    @PutMapping("/{numero_contratacao}")
+    public ResponseEntity<Contratacao> update(@PathVariable Long numero_contratacao, @RequestBody ContratacaoRequestUpdate dto) {
+        Contratacao contratacao = contratacaoService.findById(numero_contratacao);
+        if (contratacao == null) {
+            return ResponseEntity.notFound().build();
+        }
 
-	@PutMapping
-	public Contratacao update(@RequestBody ContratacaoRequestUpdate dto) {
-		
-		boolean exists =
-				contratacaoRepository.existsById(dto.getNumero_contratacao());
-		
-		if (!exists) {
-			throw new RuntimeException("Id nÃ£o encontrado " 
-							+ dto.getNumero_contratacao());			
-		}
-		
-		Contratacao contratacao = new Contratacao();
-		contratacao.setCodigo_cliente(dto.getCodigo_cliente());
-		contratacao.setCodigo_produto(dto.getCodigo_produto());
-		contratacao.setData_contratacao(dto.getData_contratacao());
-		contratacao.setNumero_contratacao(dto.getNumero_contratacao());
-		Contratacao result = contratacaoService.save(contratacao);
-		return result;
-	}
+        contratacao.setCodigo_cliente(dto.getCodigo_cliente());
+        contratacao.setCodigo_produto(dto.getCodigo_produto());
+        contratacao.setData_contratacao(dto.getData_contratacao());
 
-	@DeleteMapping(value = "{numero_contratacao}")
-	public void delete(@PathVariable Long numero_contratacao) {
-		contratacaoRepository.deleteById(numero_contratacao);
-	}
+        Contratacao updatedContratacao = contratacaoService.save(contratacao);
+        return ResponseEntity.ok(updatedContratacao);
+    }
 
+    @DeleteMapping("/{numero_contratacao}")
+    public void delete(@PathVariable Long numero_contratacao) {
+        contratacaoService.delete(numero_contratacao);
+    }
 }
