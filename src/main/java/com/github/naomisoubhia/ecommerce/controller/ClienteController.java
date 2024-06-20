@@ -26,6 +26,15 @@ public class ClienteController {
         return result;
     }
 
+    @GetMapping("/{codigo_cliente}")
+    public ResponseEntity<Cliente> getById(@PathVariable Long codigo_cliente) {
+        Cliente cliente = clienteService.findById(codigo_cliente);
+        if (cliente == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(cliente);
+    }
+
     @PostMapping
     public Cliente create(@RequestBody ClienteRequestCreate dto) {
         Cliente cliente = new Cliente();
