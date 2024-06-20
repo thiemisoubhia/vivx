@@ -1,10 +1,11 @@
 package com.github.naomisoubhia.ecommerce.controller;
 
-import com.github.naomisoubhia.ecommerce.controller.dto.produtos.ProdutoRequestCreate;
-import com.github.naomisoubhia.ecommerce.controller.dto.produtos.ProdutoRequestUpdate;
-import com.github.naomisoubhia.ecommerce.controller.dto.produtos.ProdutoResponse;
-import com.github.naomisoubhia.ecommerce.model.Produto;
-import com.github.naomisoubhia.ecommerce.service.ProdutoService;
+import com.github.naomisoubhia.ecommerce.controller.dto.cliente.ClienteRequestCreate;
+import com.github.naomisoubhia.ecommerce.controller.dto.cliente.ClienteRequestUpdate;
+import com.github.naomisoubhia.ecommerce.controller.dto.cliente.SearchedCliente;
+import com.github.naomisoubhia.ecommerce.model.Cliente;
+import org.springframework.http.ResponseEntity;
+import com.github.naomisoubhia.ecommerce.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,57 +13,50 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/produtos")
-public class ProdutoController {
+@RequestMapping("/clientes")
+public class ClienteController {
 
     @Autowired
-    private ProdutoService produtoService;
+    private ClienteService clienteService;
 
     @GetMapping
-    public List<ProdutoResponse> listAll() {
-        return produtoService.list().stream()
-                .map(ProdutoResponse::toDto)
+    public List<SearchedCliente> listAll() {
+        List<SearchedCliente> result = clienteService.list().stream()
+                .map(SearchedCliente::toDto)
                 .collect(Collectors.toList());
+        return result;
     }
 
-    @GetMapping("/{codigo_produto}")
-    public ProdutoResponse getById(@PathVariable Long codigo_produto) {
-        Produto produto = produtoService.findById(codigo_produto);
-        if (produto == null) {
-            throw new RuntimeException("Produto não encontrado com o código: " + codigo_produto);
+    @GetMapping("/{codigo_cliente}")
+    public ResponseEntity<Cliente> getById(@PathVariable Long codigo_cliente) {
+        Cliente cliente = clienteService.findById(codigo_cliente);
+        if (cliente == null) {
+            return ResponseEntity.notFound().build();
         }
-        return ProdutoResponse.toDto(produto);
+        return ResponseEntity.ok(cliente);
     }
 
     @PostMapping
-    public Produto create(@RequestBody ProdutoRequestCreate dto) {
-        Produto produto = new Produto();
-        produto.setNome(dto.getNome());
-        produto.setTipoProduto(dto.getTipoProduto());
-        produto.setStatus(dto.getStatus());
-        produto.setDataIn(dto.getDataIn());
-        produto.setTipoAssinatura(dto.getTipoAssinatura());
-        produto.setDescricao(dto.getDescricao());
-        return produtoService.save(produto);
+    public Cliente create(@RequestBody ClienteRequestCreate dto) {
+        Cliente cliente = new Cliente();
+        cliente.setNome(dto.getNome());
+        cliente.setEmail(dto.getEmail());
+        return clienteService.save(cliente);
     }
 
-    @PutMapping("/{codigo_produto}")
-    public Produto update(@PathVariable Long codigo_produto, @RequestBody ProdutoRequestUpdate dto) {
-        Produto produto = produtoService.findById(codigo_produto);
-        if (produto == null) {
-            throw new RuntimeException("Produto não encontrado com o código: " + codigo_produto);
+    @PutMapping("/{codigo_cliente}")
+    public Cliente update(@PathVariable Long codigo_cliente, @RequestBody ClienteRequestUpdate dto) {
+        Cliente cliente = clienteService.findById(codigo_cliente);
+        if (cliente == null) {
+            throw new RuntimeException("Cliente não encontrado com o código: " + codigo_cliente);
         }
-        produto.setNome(dto.getNome());
-        produto.setTipoProduto(dto.getTipoProduto());
-        produto.setStatus(dto.getStatus());
-        produto.setDataIn(dto.getDataIn());
-        produto.setTipoAssinatura(dto.getTipoAssinatura());
-        produto.setDescricao(dto.getDescricao());
-        return produtoService.save(produto);
+        cliente.setNome(dto.getNome());
+        cliente.setEmail(dto.getEmail());
+        return clienteService.save(cliente);
     }
 
-    @DeleteMapping("/{codigo_produto}")
-    public void delete(@PathVariable Long codigo_produto) {
-        produtoService.delete(codigo_produto);
+    @DeleteMapping("/{codigo_cliente}")
+    public void delete(@PathVariable Long codigo_cliente) {
+        clienteService.delete(codigo_cliente);
     }
 }
