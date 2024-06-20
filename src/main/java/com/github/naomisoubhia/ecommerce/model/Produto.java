@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "produtos")
-public class Produtos {
+public class Produto{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long codigo_produto;
