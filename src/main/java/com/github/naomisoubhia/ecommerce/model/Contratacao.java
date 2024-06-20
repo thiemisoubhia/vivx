@@ -37,10 +37,10 @@ public class Contratacao {
 	}
 
 	public Long getCodigo_produto() {
-		return codigo_cliente;
+		return codigo_produto;
 	}
 	public void setCodigo_produto(Long codigo_produto) {
-		this.codigo_cliente = codigo_cliente;
+		this.codigo_produto = codigo_produto;
 	}
 	
 	public LocalDate getData_contratacao() {
