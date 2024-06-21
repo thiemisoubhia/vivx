@@ -1,7 +1,6 @@
 package com.github.naomisoubhia.ecommerce.controller.dto.contratacao;
 
 import com.github.naomisoubhia.ecommerce.model.Contratacao;
-
 import java.time.LocalDate;
 
 public class SearchedContratacao {
