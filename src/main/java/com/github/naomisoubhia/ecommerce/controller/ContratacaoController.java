@@ -3,8 +3,12 @@ package com.github.naomisoubhia.ecommerce.controller;
 import com.github.naomisoubhia.ecommerce.controller.dto.contratacao.ContratacaoRequestCreate;
 import com.github.naomisoubhia.ecommerce.controller.dto.contratacao.ContratacaoRequestUpdate;
 import com.github.naomisoubhia.ecommerce.controller.dto.contratacao.SearchedContratacao;
+import com.github.naomisoubhia.ecommerce.model.Cliente;
 import com.github.naomisoubhia.ecommerce.model.Contratacao;
+import com.github.naomisoubhia.ecommerce.model.Produto;
+import com.github.naomisoubhia.ecommerce.service.ClienteService;
 import com.github.naomisoubhia.ecommerce.service.ContratacaoService;
+import com.github.naomisoubhia.ecommerce.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +25,12 @@ public class ContratacaoController {
     @Autowired
     private ContratacaoService contratacaoService;
 
+    @Autowired
+    private ClienteService clienteService;
+
+    @Autowired
+    private ProdutoService produtoService;
+
     @GetMapping
     public List<SearchedContratacao> listAll() {
         return contratacaoService.list().stream().map(SearchedContratacao::toDto)
@@ -28,17 +38,25 @@ public class ContratacaoController {
     }
 
     @PostMapping
-    public Contratacao create(@RequestBody ContratacaoRequestCreate dto) {
+    public ResponseEntity<Contratacao> create(@RequestBody ContratacaoRequestCreate dto) {
+        Cliente cliente = clienteService.findById(dto.getCodigo_cliente());
+        Produto produto = produtoService.findById(dto.getCodigo_produto());
+
+        if (cliente == null || produto == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
         Contratacao contratacao = new Contratacao();
-        contratacao.setCodigo_cliente(dto.getCodigo_cliente());
-        contratacao.setCodigo_produto(dto.getCodigo_produto());
+        contratacao.setCliente(cliente);
+        contratacao.setProduto(produto);
         
         // Converter java.util.Date para java.time.LocalDate
         LocalDate dataContratacao = dto.getData_contratacao().toInstant()
                 .atZone(ZoneId.systemDefault()).toLocalDate();
         contratacao.setData_contratacao(dataContratacao);
 
-        return contratacaoService.save(contratacao);
+        Contratacao savedContratacao = contratacaoService.save(contratacao);
+        return ResponseEntity.ok(savedContratacao);
     }
 
     @PutMapping("/{numero_contratacao}")
@@ -48,8 +66,15 @@ public class ContratacaoController {
             return ResponseEntity.notFound().build();
         }
 
-        contratacao.setCodigo_cliente(dto.getCodigo_cliente());
-        contratacao.setCodigo_produto(dto.getCodigo_produto());
+        Cliente cliente = clienteService.findById(dto.getCodigo_cliente());
+        Produto produto = produtoService.findById(dto.getCodigo_produto());
+
+        if (cliente == null || produto == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        contratacao.setCliente(cliente);
+        contratacao.setProduto(produto);
 
         // Converter java.util.Date para java.time.LocalDate
         LocalDate dataContratacao = dto.getData_contratacao().toInstant()
