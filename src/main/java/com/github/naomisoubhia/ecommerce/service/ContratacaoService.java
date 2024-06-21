@@ -28,13 +28,13 @@ public class ContratacaoService {
     }
 
     public List<Contratacao> findByCodigoCliente(Long codigoCliente) {
-        Query query = entityManager.createQuery("SELECT c FROM Contratacao c WHERE c.codigo_cliente = :codigoCliente");
+        Query query = entityManager.createQuery("SELECT c FROM Contratacao c WHERE c.cliente.codigo_cliente = :codigoCliente");
         query.setParameter("codigoCliente", codigoCliente);
         return query.getResultList();
     }
 
     public List<Contratacao> findByCodigoProduto(Long codigoProduto) {
-        Query query = entityManager.createQuery("SELECT c FROM Contratacao c WHERE c.codigo_produto = :codigoProduto");
+        Query query = entityManager.createQuery("SELECT c FROM Contratacao c WHERE c.produto.codigo_produto = :codigoProduto");
         query.setParameter("codigoProduto", codigoProduto);
         return query.getResultList();
     }
