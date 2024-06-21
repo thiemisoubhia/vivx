@@ -2,39 +2,56 @@ package com.github.naomisoubhia.ecommerce.controller.dto.contratacao;
 
 import com.github.naomisoubhia.ecommerce.model.Contratacao;
 
+import java.time.LocalDate;
 
 public class SearchedContratacao {
-    private Long numero_contratacao, codigo_cliente, codigo_produto;
+    private Long numeroContratacao;
+    private Long codigoCliente;
+    private Long codigoProduto;
+    private LocalDate dataContratacao;
 
-    public Long getNumero_contratacao() {
-        return numero_contratacao;
-    }
+    // Getters and Setters
 
-    public void setNumero_contratacao(Long numero_contratacao) {
-        this.numero_contratacao = numero_contratacao;
-    }
-
-    public Long getCodigo_cliente() {
-        return codigo_cliente;
-    }
-
-    public void setCodigo_cliente(Long codigo_cliente) {
-        this.codigo_cliente = codigo_cliente;
-    }
-
-    public Long getCodigo_produto() {
-        return codigo_produto;
-    }
-
-    public void setCodigo_produto(Long codigo_produto) {
-        this.codigo_produto = codigo_produto;
-    }
-    
-    public static SearchedContratacao toDto(Contratacao contratacao){
+    public static SearchedContratacao toDto(Contratacao contratacao) {
         SearchedContratacao dto = new SearchedContratacao();
-        dto.setNumero_contratacao(contratacao.getNumero_contratacao());
-        dto.setCodigo_cliente(contratacao.getCodigo_cliente());
-        dto.setCodigo_produto(contratacao.getCodigo_produto());
+        dto.setNumeroContratacao(contratacao.getNumero_contratacao());
+        dto.setCodigoCliente(contratacao.getCliente().getCodigo_cliente());
+        dto.setCodigoProduto(contratacao.getProduto().getCodigo_produto());
+        dto.setDataContratacao(contratacao.getData_contratacao());
         return dto;
+    }
+
+    // Getters and Setters
+
+    public Long getNumeroContratacao() {
+        return numeroContratacao;
+    }
+
+    public void setNumeroContratacao(Long numeroContratacao) {
+        this.numeroContratacao = numeroContratacao;
+    }
+
+    public Long getCodigoCliente() {
+        return codigoCliente;
+    }
+
+    public void setCodigoCliente(Long codigoCliente) {
+        this.codigoCliente = codigoCliente;
+    }
+
+    public Long getCodigoProduto() {
+        return codigoProduto;
+    }
+
+    public void setCodigoProduto(Long codigoProduto) {
+        this.codigoProduto = codigoProduto;
+    }
+
+    public LocalDate getDataContratacao() {
+        return dataContratacao;
+    }
+
+    public void setDataContratacao(LocalDate dataContratacao) {
+        this.dataContratacao = dataContratacao;
     }
 }
