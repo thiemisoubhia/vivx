@@ -1,5 +1,6 @@
 package com.github.naomisoubhia.ecommerce.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,20 +8,31 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "produtos")
-public class Produto{
+@Table(name = "PRODUTOS")
+public class Produto {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CODIGO_PRODUTO")
     private Long codigo_produto;
 
+    @Column(name = "NOME")
     private String nome;
+
+    @Column(name = "TIPO_PRODUTO")
     private String tipoProduto;
+
+    @Column(name = "STATUS")
     private String status;
+
+    @Column(name = "DATA_IN")
     private String dataIn;
+
+    @Column(name = "TIPO_ASSINATURA")
     private String tipoAssinatura;
+
+    @Column(name = "DESCRICAO")
     private String descricao;
 
-    // Getters and Setters
     public Long getCodigo_produto() {
         return codigo_produto;
     }
