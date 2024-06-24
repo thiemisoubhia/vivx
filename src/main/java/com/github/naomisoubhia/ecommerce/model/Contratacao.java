@@ -1,35 +1,27 @@
 package com.github.naomisoubhia.ecommerce.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 @Entity
-@Table(name = "CONTRATACOES")
+@Table(name = "contratacoes")
 public class Contratacao {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "NUMERO_CONTRATACAO")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contratacao_seq")
+    @SequenceGenerator(name = "contratacao_seq", sequenceName = "contratacao_seq", allocationSize = 1)
     private Long numero_contratacao;
-    
+
     @ManyToOne
-    @JoinColumn(name = "CODIGO_CLIENTE", referencedColumnName = "CODIGO_CLIENTE")
+    @JoinColumn(name = "codigo_cliente")
     private Cliente cliente;
-    
+
     @ManyToOne
-    @JoinColumn(name = "CODIGO_PRODUTO", referencedColumnName = "CODIGO_PRODUTO")
+    @JoinColumn(name = "codigo_produto")
     private Produto produto;
-    
-    @Column(name = "DATA_CONTRATACAO")
+
     private LocalDate data_contratacao;
 
+    // Getters e Setters
     public Long getNumero_contratacao() {
         return numero_contratacao;
     }
