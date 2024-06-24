@@ -38,25 +38,23 @@ public class ContratacaoController {
     }
 
     @PostMapping
-    public ResponseEntity<Contratacao> create(@RequestBody ContratacaoRequestCreate dto) {
+    public Contratacao create(@RequestBody ContratacaoRequestCreate dto) {
+        Contratacao contratacao = new Contratacao();
         Cliente cliente = clienteService.findById(dto.getCodigo_cliente());
         Produto produto = produtoService.findById(dto.getCodigo_produto());
-
+        
         if (cliente == null || produto == null) {
-            return ResponseEntity.badRequest().build();
+            throw new IllegalArgumentException("Cliente ou Produto inválido.");
         }
-
-        Contratacao contratacao = new Contratacao();
+        
         contratacao.setCliente(cliente);
         contratacao.setProduto(produto);
-        
-        // Converter java.util.Date para java.time.LocalDate
+
         LocalDate dataContratacao = dto.getData_contratacao().toInstant()
                 .atZone(ZoneId.systemDefault()).toLocalDate();
         contratacao.setData_contratacao(dataContratacao);
 
-        Contratacao savedContratacao = contratacaoService.save(contratacao);
-        return ResponseEntity.ok(savedContratacao);
+        return contratacaoService.save(contratacao);
     }
 
     @PutMapping("/{numero_contratacao}")
@@ -70,13 +68,12 @@ public class ContratacaoController {
         Produto produto = produtoService.findById(dto.getCodigo_produto());
 
         if (cliente == null || produto == null) {
-            return ResponseEntity.badRequest().build();
+            throw new IllegalArgumentException("Cliente ou Produto inválido.");
         }
 
         contratacao.setCliente(cliente);
         contratacao.setProduto(produto);
 
-        // Converter java.util.Date para java.time.LocalDate
         LocalDate dataContratacao = dto.getData_contratacao().toInstant()
                 .atZone(ZoneId.systemDefault()).toLocalDate();
         contratacao.setData_contratacao(dataContratacao);
