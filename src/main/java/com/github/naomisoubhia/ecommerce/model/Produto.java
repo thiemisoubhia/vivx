@@ -1,40 +1,29 @@
 package com.github.naomisoubhia.ecommerce.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "PRODUTOS")
+@Table(name = "produtos")
 public class Produto {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CODIGO_PRODUTO")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produto_seq")
+    @SequenceGenerator(name = "produto_seq", sequenceName = "produto_seq", allocationSize = 1)
     private Long codigo_produto;
 
-    @Column(name = "NOME")
     private String nome;
-
-    @Column(name = "TIPO_PRODUTO")
     private String tipoProduto;
-
-    @Column(name = "STATUS")
     private String status;
-
-    @Column(name = "DATA_IN")
     private String dataIn;
-
-    @Column(name = "TIPO_ASSINATURA")
     private String tipoAssinatura;
-
-    @Column(name = "DESCRICAO")
     private String descricao;
 
+    // Getters e Setters
     public Long getCodigo_produto() {
         return codigo_produto;
+    }
+
+    public void setCodigo_produto(Long codigo_produto) {
+        this.codigo_produto = codigo_produto;
     }
 
     public String getNome() {
