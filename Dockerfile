@@ -1,24 +1,12 @@
-FROM maven:3.8.3-jdk-11-slim AS build
-
-RUN mkdir /project
-
-COPY . /project
-
-WORKDIR /project
-
-RUN mvn clean package
-
-FROM adoptopenjdk/openjdk11:jre-11.0.15_10-alpine
-
-RUN mkdir /app
-
-COPY --from= /target/app.war /app/app.war
-
-ENV PROFILE=dev
-
+# Etapa de construção
+FROM maven:3.8.4-openjdk-8-slim AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-
-EXPOSE 8080 
-
-ENTRYPOINT ["java", "-Dspring.profiles.active=${PROFILE}", "-jar", "app.war"]
+# Etapa de execução
+FROM openjdk:8-jre-slim
+COPY --from=build /app/target/*.war /app/app.war
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/app/app.war"]
