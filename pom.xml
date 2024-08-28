@@ -60,7 +60,7 @@
         <dependency>
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt-spring-boot-starter</artifactId>
-            <version>3.0.0</version> <!-- Verifique a versão mais recente -->
+            <version>2.0.0</version> <!-- Verifique a versão mais recente -->
         </dependency>
     </dependencies>
     <build>
