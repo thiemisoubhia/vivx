@@ -10,10 +10,7 @@ import org.springframework.context.annotation.Import;
 @ConditionalOnProperty(name = "jasypt.encryptor.bootstrap", havingValue = "true", matchIfMissing = true)
 @Import(EnableEncryptablePropertiesConfiguration.class)
 public class Application {
-
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
-
-
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 }
