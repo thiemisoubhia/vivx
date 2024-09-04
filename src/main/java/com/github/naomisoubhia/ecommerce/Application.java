@@ -2,9 +2,11 @@ package com.github.naomisoubhia.ecommerce;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-@EnableEncryptableProperties
+@ConditionalOnProperty(name = "jasypt.encryptor.bootstrap", havingValue = "true", matchIfMissing = true)
+@Import(EnableEncryptablePropertiesConfiguration.class)
 public class Application {
 
 	public static void main(String[] args) {
