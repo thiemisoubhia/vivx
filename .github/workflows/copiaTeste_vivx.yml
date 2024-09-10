@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy container app to Azure Web App - vivx
+name: Build, Deploy, and Failover to Azure Web App - vivx
 
 on:
   push:
@@ -14,7 +11,8 @@ jobs:
     runs-on: 'ubuntu-latest'
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
@@ -49,3 +47,22 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_b282fa659e48438b804a3ac704498311 }}
         images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_437561a8950648ac95800180f7ad89d4 }}/teste:${{ github.sha }}'
+
+  failover:
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: github.ref == 'refs/heads/teste3' # Run failover only on 'teste3' branch
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run replication script
+      run: |
+        ./scripts/replicate.sh
+
+    - name: Deploy to Azure
+      run: |
+        az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+        az acr login --name myregistry
+        az container start --name my-container
