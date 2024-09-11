@@ -17,18 +17,18 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
-    - name: Log in to Docker Hub
+    - name: Log in to registry
       uses: docker/login-action@v2
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_437561a8950648ac95800180f7ad89d4 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_fedb5e66478f465faf803c238e93b792 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: index.docker.io/${{ secrets.DOCKER_USERNAME }}/teste:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_437561a8950648ac95800180f7ad89d4 }}/teste:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -36,6 +36,8 @@ jobs:
     needs: build
     environment:
       name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
     steps:
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
@@ -44,7 +46,7 @@ jobs:
         app-name: 'vivx'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_b282fa659e48438b804a3ac704498311 }}
-        images: 'index.docker.io/${{ secrets.DOCKER_USERNAME }}/teste:${{ github.sha }}'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_437561a8950648ac95800180f7ad89d4 }}/teste:${{ github.sha }}'
 
   failover:
     runs-on: ubuntu-latest
