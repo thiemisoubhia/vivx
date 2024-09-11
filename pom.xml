@@ -122,6 +122,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.github.naomisoubhia.YourMainClass</mainClass> <!-- Substitua pelo nome da sua classe principal -->
+                </configuration>
             </plugin>
             
             <!-- Maven WAR Plugin for Packaging -->
