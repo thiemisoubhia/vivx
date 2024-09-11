@@ -10,28 +10,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  failover:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/teste3' # Execute este job somente para a branch 'teste3'
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Run replication script
-      run: |
-        ./scripts/replicate.sh
-
-    - name: Deploy to Azure
-      run: |
-        az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
-        az acr login --name myregistry
-        az container start --name my-container
-
   build:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/final' # Execute este job somente para a branch 'final'
-    needs: failover # Este job só é executado após o job 'failover'
+    runs-on: 'ubuntu-latest'
 
     steps:
     - uses: actions/checkout@v2
@@ -55,8 +35,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/final' # Execute este job somente para a branch 'final'
-    needs: build # Este job só é executado após o job 'build'
+    needs: build
     environment:
       name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
@@ -70,3 +49,22 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_5285c9ae1ac24dcaba1ab9ae0358027e }}
         images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_ea9b68b95344450abf5983497f9587a8 }}/teste:${{ github.sha }}'
+
+  failover:
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+ 
+    - name: Run replication script
+      run: |
+        ./scripts/replicate.sh
+ 
+    - name: Deploy to Azure
+      run: |
+        az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+        az acr login --name myregistry
+        az container start --name my-container
+
+        
