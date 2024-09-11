@@ -2,9 +2,6 @@ package com.github.naomisoubhia.ecommerce.service;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.retry.annotation.Retryable;
-import org.springframework.retry.annotation.Recover;
-import org.springframework.retry.annotation.RetryableException;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.sql.SQLException;
