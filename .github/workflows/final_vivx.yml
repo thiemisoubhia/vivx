@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_eb33afcc337d4014bd8bcdf870d4aa7f }}/thiemisoubhia/teste:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_eb33afcc337d4014bd8bcdf870d4aa7f }}/teste:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +48,4 @@ jobs:
         app-name: 'vivx'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_08804f912a5c41dda84b09a359203aa6 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_eb33afcc337d4014bd8bcdf870d4aa7f }}/thiemisoubhia/teste:${{ github.sha }}'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_eb33afcc337d4014bd8bcdf870d4aa7f }}/teste:${{ github.sha }}'
