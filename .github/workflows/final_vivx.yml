@@ -51,7 +51,7 @@ jobs:
   failover:
     runs-on: ubuntu-latest
     needs: deploy
-    if: github.ref == 'refs/heads/teste3' # Run failover only on 'teste3' branch
+    if: github.ref == 'refs/heads/final'
 
     steps:
     - name: Checkout repository
