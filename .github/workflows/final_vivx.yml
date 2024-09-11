@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy container app to Azure Web App - vivx
+name: CI/CD Pipeline
 
 on:
   push:
@@ -10,8 +7,28 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: 'ubuntu-latest'
+  failover:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/teste3' # Execute este job somente para a branch 'teste3'
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run replication script
+      run: |
+        ./scripts/replicate.sh
+
+    - name: Deploy to Azure
+      run: |
+        az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+        az acr login --name myregistry
+        az container start --name my-container
+
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/final' # Execute este job somente para a branch 'final'
+    needs: failover # Este job só é executado após o job 'failover'
 
     steps:
     - uses: actions/checkout@v2
@@ -33,14 +50,6 @@ jobs:
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_ea9b68b95344450abf5983497f9587a8 }}/teste:${{ github.sha }}
         file: ./Dockerfile
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
