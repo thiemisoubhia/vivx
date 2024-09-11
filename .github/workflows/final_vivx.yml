@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy container app to Azure Web App - vivx
 
 on:
@@ -50,21 +47,11 @@ jobs:
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_5285c9ae1ac24dcaba1ab9ae0358027e }}
         images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_ea9b68b95344450abf5983497f9587a8 }}/teste:${{ github.sha }}'
 
-  failover:
+  failure-handling:
     runs-on: ubuntu-latest
- 
+    if: failure()  # This job will run only if any previous job fails
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
- 
-    - name: Run replication script
+    - name: Notify failure
       run: |
-        ./scripts/replicate.sh
- 
-    - name: Deploy to Azure
-      run: |
-        az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
-        az acr login --name myregistry
-        az container start --name my-container
-
-        
+        echo "The build or deployment failed. Sending notification."
+  
