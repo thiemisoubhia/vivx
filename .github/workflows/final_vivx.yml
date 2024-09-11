@@ -57,9 +57,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Set script permissions
+      run: chmod +x ./scripts/replicate.sh
+
     - name: Run replication script
-      run: |
-        ./scripts/replicate.sh
+      run: ./scripts/replicate.sh
 
     - name: Deploy to Azure
       run: |
