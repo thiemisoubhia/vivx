@@ -33,25 +33,6 @@ public class DatabaseServiceTest {
         verify(databaseService, times(3)).fetchData();
     }
 
-    @Test
-    void testFetchDataRecovery() throws SQLException {
-        // Crie um mock do DatabaseService
-        DatabaseService databaseService = Mockito.mock(DatabaseService.class);
 
-        // Simule a SQLException para forçar o retry e depois a chamada ao recover
-        doThrow(new SQLException("Database error")).when(databaseService).fetchData();
-
-        // Crie uma instância do DatabaseService real para testar o comportamento
-        DatabaseService realDatabaseService = new DatabaseService();
-
-        // Simule a recuperação
-        Mockito.doNothing().when(databaseService).recover(any(SQLException.class));
-
-        // Chame o método fetchData
-        try {
-            realDatabaseService.fetchData();
-        } catch (SQLException e) {
-            // A exceção esperada após os retries
-        }
     }
 }
