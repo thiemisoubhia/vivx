@@ -5,6 +5,7 @@ COPY pom.xml .
 COPY src ./src
 RUN mvn clean package -DskipTests
 
+
 # Etapa de execução
 FROM openjdk:8-jre-slim
 COPY --from=build /app/target/*.war /app/app.war
