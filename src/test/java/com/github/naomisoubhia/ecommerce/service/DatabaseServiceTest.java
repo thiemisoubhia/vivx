@@ -32,7 +32,4 @@ public class DatabaseServiceTest {
         // Verifique se o método fetchData foi chamado 3 vezes
         verify(databaseService, times(3)).fetchData();
     }
-
-
-    }
 }
