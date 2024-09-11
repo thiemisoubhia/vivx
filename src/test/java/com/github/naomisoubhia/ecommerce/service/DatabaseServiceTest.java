@@ -2,16 +2,19 @@ package com.github.naomisoubhia.ecommerce.service;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
+import org.springframework.retry.annotation.Recover;
 
 import java.sql.SQLException;
 
 import static org.mockito.Mockito.*;
 
-@SpringJUnitConfig
+@SpringBootTest
 public class DatabaseServiceTest {
 
-  @Test
+    @Test
     void testFetchDataRetries() throws SQLException {
         // Crie um mock do DatabaseService
         DatabaseService databaseService = Mockito.spy(new DatabaseService());
