@@ -2,8 +2,8 @@
 
 # Configurações do banco de dados principal (Oracle)
 PRIMARY_HOST="oracle.fiap.com.br"
-PRIMARY_USER="user"
-PRIMARY_PASSWORD="pass"
+PRIMARY_USER="rm87323"
+PRIMARY_PASSWORD="141003"
 PRIMARY_DB="orcl"
 
 # Configurações do banco de dados replicado (MySQL)
