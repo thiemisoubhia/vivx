@@ -11,8 +11,8 @@ public class JasyptConfig {
     @Bean(name = "jasyptStringEncryptor")
     public StringEncryptor stringEncryptor() {
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setPassword("SimplePassword"); // Senha para descriptografar propriedades
-        encryptor.setAlgorithm("PBEWithMD5AndDES"); // Algoritmo de criptografia
+        encryptor.setPassword("SimplePassword");
+        encryptor.setAlgorithm("PBEWithMD5AndDES");
         return encryptor;
     }
 }
