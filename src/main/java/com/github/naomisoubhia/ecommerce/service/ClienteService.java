@@ -25,7 +25,6 @@ public class ClienteService {
     }
 
     public Cliente save(Cliente cliente) {
-        // Aqui você poderia incluir lógicas adicionais antes de salvar, se necessário
         return clienteRepository.save(cliente);
     }
 
