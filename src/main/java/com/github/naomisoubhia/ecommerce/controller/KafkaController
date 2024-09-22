@@ -1,0 +1,13 @@
+@RestController
+@RequestMapping("/api/kafka")
+public class KafkaTestController {
+
+    @Autowired
+    private KafkaProducer kafkaProducer;
+
+    @GetMapping("/send")
+    public String sendMessageToKafka(@RequestParam("message") String message) {
+        kafkaProducer.sendMessage(message);
+        return "Mensagem enviada ao Kafka: " + message;
+    }
+}
