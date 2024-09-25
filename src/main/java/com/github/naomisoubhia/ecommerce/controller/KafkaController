@@ -14,7 +14,7 @@ public class KafkaTestController {
     @Autowired
     private KafkaProducer kafkaProducer;
 
-    @GetMapping("/send")
+    @GetMapping("/kafka/send")
     public String sendMessageToKafka(@RequestParam("message") String message) {
         kafkaProducer.sendMessage(message);
         return "Mensagem enviada ao Kafka: " + message;
