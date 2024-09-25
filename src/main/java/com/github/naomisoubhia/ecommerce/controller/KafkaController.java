@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/kafka")
-public class KafkaTestController {
+public class KafkaController {
 
     @Autowired
     private KafkaProducer kafkaProducer;
