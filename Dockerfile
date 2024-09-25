@@ -7,7 +7,6 @@ RUN mvn clean package -DskipTests
 
 # Etapa de execução
 FROM openjdk:8-jre-slim
-WORKDIR /app
-COPY --from=build /app/target/*.war app.war
+COPY --from=build /app/target/*.war /app/app.war
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.war"]
+ENTRYPOINT ["java", "-jar", "/app/app.war"]
