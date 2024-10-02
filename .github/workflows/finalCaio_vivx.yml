@@ -51,6 +51,7 @@ jobs:
         images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_9e48601abacf4c518343176b84482fa7 }}/teste:${{ github.sha }}'
   
   
+
   failover:
     runs-on: ubuntu-latest
     needs: deploy
