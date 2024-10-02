@@ -49,3 +49,25 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_513a9310333449cea4d4f95e3a567b08 }}
         images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_9e48601abacf4c518343176b84482fa7 }}/teste:${{ github.sha }}'
+  
+  
+  failover:
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: github.ref == 'refs/heads/teste3'
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set script permissions
+      run: chmod +x ./scripts/replicate.sh
+
+    - name: Run replication script
+      run: ./scripts/replicate.sh
+
+    - name: Deploy to Azure
+      run: |
+        az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+        az acr login --name myregistry
+        az container start --name my-container
