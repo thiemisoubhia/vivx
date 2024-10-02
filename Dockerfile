@@ -8,10 +8,5 @@ RUN mvn clean package -DskipTests
 # Etapa de execução
 FROM openjdk:8-jre-slim
 COPY --from=build /app/target/*.war /app/app.war
-
-# Expor a porta 80 no contêiner
-ENV PORT 80
-EXPOSE 80
-
-# Executar o app e passar a porta como argumento
-ENTRYPOINT ["java", "-jar", "/app/app.war", "--server.port=80"]
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "/app/app.war"]
