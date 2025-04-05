@@ -1,4 +1,4 @@
-# 💜 Vivo API Replica · Naomi Soubhia
+# 💜 Vivo API Replica
 
 Welcome to the **Vivo API Replica**, a backend project developed as part of the **Next FIAP** challenge in partnership with **Vivo**. This application replicates part of the API functionalities used by Vivo to manage clients and products — with a strong focus on **security**, **database management**, and **API monitoring** using **Microsoft Azure**.
 
@@ -47,7 +47,14 @@ cd ecommerce
 ```
 
 
-## 💜 You can access the API at:
+## You can access the API at:
  http://localhost:8080/api
  Swagger UI: http://localhost:8080/swagger-ui.html
 
+
+## 💜 Team:
+- Ana Furtado
+- Caio Favaro
+- Thiemi Soubhia
+- Naomi Soubhia
+- Yasmim Bussoni
